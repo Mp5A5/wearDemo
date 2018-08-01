@@ -6,7 +6,7 @@ android {
         release {
             keyAlias 'keyalias'
             keyPassword '123456'
-            storeFile file('/Users/nangongyun/AndroidStudioProjects/Co_Project/me_demo_jks/wearDemoKey.jks')
+            storeFile file('./wearDemoKey.jks')
             storePassword '123456'
         }
     }
