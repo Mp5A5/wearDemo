@@ -12,11 +12,12 @@ import android.os.Bundle;
 public class MyApplication extends Application {
 
   private int count = 0;
+  private static MyApplication application = null;
 
   @Override
   public void onCreate() {
     super.onCreate();
-
+    application = this;
 
     registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
       @Override
@@ -59,10 +60,11 @@ public class MyApplication extends Application {
   }
 
   public boolean isBackground() {
-    if (count <= 0) {
-      return true;
-    } else {
-      return false;
-    }
+    return count <= 0;
+  }
+
+
+  public static MyApplication getApplication() {
+    return application;
   }
 }

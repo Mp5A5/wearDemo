@@ -5,7 +5,6 @@
     android:background="@color/dark_grey"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     tools:deviceIds="wear"
     android:padding="@dimen/box_inset_layout_padding"
     >
@@ -18,7 +17,6 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/rl_me_setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -26,14 +24,15 @@
             <TextView
                 android:id="@+id/tv_longitude"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="@dimen/size_10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="经度"
+                android:layout_marginTop="@dimen/size_10dp"
                 />
 
             <TextView
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/size_10dp"
                 android:id="@+id/tv_latitude"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
