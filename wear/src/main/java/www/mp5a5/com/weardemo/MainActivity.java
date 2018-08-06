@@ -45,6 +45,10 @@ public class MainActivity extends WearableActivity {
           }
         })
     );
+
+    UiUtils.findViewById(this, R.id.btn_location).setOnClickListener(v ->
+        startActivity(new Intent(this, MapLocationActivity.class))
+    );
   }
 
   private void callPhone() {

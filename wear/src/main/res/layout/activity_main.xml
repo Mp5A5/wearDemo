@@ -23,6 +23,17 @@
 
         <include layout="@layout/view_main_setting" />
 
+        <Button
+            android:layout_marginTop="@dimen/size_10dp"
+            android:id="@+id/btn_location"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_30dp"
+            android:background="@color/white"
+            android:text="位置"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/size_20dp"
+            android:layout_marginEnd="@dimen/size_20dp"
+            />
 
     </LinearLayout>
 </android.support.wear.widget.BoxInsetLayout>
