@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/size_40dp"
+    >
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:id="@+id/iv_location_one"
+        android:layout_width="@dimen/size_20dp"
+        android:layout_height="@dimen/size_20dp"
+        android:src="@mipmap/icon_location"
+        android:layout_marginStart="@dimen/size_10dp"
+        />
+
+    <EditText
+        android:id="@+id/et_input_time"
+        android:layout_toEndOf="@+id/iv_location_one"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/size_10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_location"
+        android:textSize="@dimen/size_15dp"
+        android:inputType="number"
+        />
+
+</RelativeLayout>

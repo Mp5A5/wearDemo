@@ -78,6 +78,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapLocationActivity" />
+        <activity android:name=".SettingActivity" />
     </application>
 
 </manifest>

@@ -9,4 +9,7 @@
 
     <string name="me_setting">设置</string>
     <string name="me_phone">电话</string>
+    <string name="setting_phone">请输入亲情电话号码</string>
+    <string name="setting_location">请设置位置发送时间(默认5分钟)</string>
+    <string name="setting_sure">确定</string>
 </resources>

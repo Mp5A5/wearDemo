@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import www.mp5a5.com.weardemo.utils.ConstantUtils;
+import www.mp5a5.com.weardemo.utils.SpUtil;
 import www.mp5a5.com.weardemo.utils.UiUtils;
 
 public class MapLocationActivity extends WearableActivity implements AMapLocationListener {
@@ -73,7 +75,14 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
     //设置是否允许模拟位置,默认为false，不允许模拟位置
     mLocationOption.setMockEnable(false);
     //设置定位间隔,单位毫秒,默认为2000ms
-    mLocationOption.setInterval(2000);
+
+    if (SpUtil.getInt(ConstantUtils.SETTING_TIME) == -1) {
+
+      mLocationOption.setInterval(5000);
+    } else {
+      mLocationOption.setInterval(formatTime(SpUtil.getInt(ConstantUtils.SETTING_TIME)));
+    }
+
     //设置定位参数
     mLocationClient.setLocationOption(mLocationOption);
     // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
@@ -114,5 +123,9 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
             + amapLocation.getErrorInfo());
       }
     }
+  }
+
+  private long formatTime(int minute) {
+    return minute * 60 * 1000;
   }
 }
