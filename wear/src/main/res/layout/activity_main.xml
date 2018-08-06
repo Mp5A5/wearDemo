@@ -19,95 +19,9 @@
         android:orientation="vertical"
         >
 
+        <include layout="@layout/view_main_phone" />
 
-        <RelativeLayout
-            android:id="@+id/rl_me_phone"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40dp"
-            >
-
-            <ImageView
-                android:layout_centerVertical="true"
-                android:id="@+id/iv_location_one"
-                android:layout_width="@dimen/size_20dp"
-                android:layout_height="@dimen/size_20dp"
-                android:src="@mipmap/icon_phone"
-                android:layout_marginStart="@dimen/size_10dp"
-                />
-
-            <TextView
-                android:id="@+id/tv_location_one"
-                android:layout_toEndOf="@+id/iv_location_one"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/size_10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/me_phone"
-                android:textSize="@dimen/size_15dp"
-                />
-
-            <TextView
-                android:id="@+id/tv_me_phone"
-                android:layout_toEndOf="@+id/tv_location_one"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/size_10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="13683673726"
-                android:textSize="@dimen/size_10dp"
-                android:textColor="@color/green_1afa29"
-                />
-
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_width="@dimen/size_20dp"
-                android:layout_height="@dimen/size_20dp"
-                android:src="@mipmap/icon_in"
-                android:layout_marginEnd="@dimen/size_10dp"
-                />
-        </RelativeLayout>
-
-        <View
-            android:background="@color/green_1afa29"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1dp"
-            />
-
-        <RelativeLayout
-            android:id="@+id/rl_me_setting"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/size_40dp"
-            >
-
-            <ImageView
-                android:layout_centerVertical="true"
-                android:id="@+id/iv_location"
-                android:layout_width="@dimen/size_20dp"
-                android:layout_height="@dimen/size_20dp"
-                android:src="@mipmap/icon_setting"
-                android:layout_marginStart="@dimen/size_10dp"
-                />
-
-            <TextView
-                android:layout_toEndOf="@+id/iv_location"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/size_10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/me_setting"
-                android:textSize="@dimen/size_15dp"
-                />
-
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_alignParentEnd="true"
-                android:layout_width="@dimen/size_20dp"
-                android:layout_height="@dimen/size_20dp"
-                android:src="@mipmap/icon_in"
-                android:layout_marginEnd="@dimen/size_10dp"
-                />
-        </RelativeLayout>
+        <include layout="@layout/view_main_setting" />
 
 
     </LinearLayout>
