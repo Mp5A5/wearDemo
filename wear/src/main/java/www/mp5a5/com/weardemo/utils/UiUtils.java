@@ -1,4 +1,4 @@
-package www.mp5a5.com.weardemo;
+package www.mp5a5.com.weardemo.utils;
 
 import android.app.Activity;
 import android.support.annotation.IdRes;

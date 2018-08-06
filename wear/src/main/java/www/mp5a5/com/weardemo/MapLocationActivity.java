@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import www.mp5a5.com.weardemo.utils.UiUtils;
+
 public class MapLocationActivity extends WearableActivity implements AMapLocationListener {
 
 

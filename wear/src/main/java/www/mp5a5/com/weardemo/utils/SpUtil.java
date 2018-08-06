@@ -1,4 +1,4 @@
-package www.mp5a5.com.weardemo;
+package www.mp5a5.com.weardemo.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,6 +12,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import www.mp5a5.com.weardemo.MyApplication;
 
 
 /**

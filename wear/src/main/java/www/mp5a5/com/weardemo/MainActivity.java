@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
 import android.widget.Toast;
 
+import www.mp5a5.com.weardemo.utils.UiUtils;
+
 public class MainActivity extends WearableActivity {
 
   @Override
