@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="13683673726"
         android:textSize="@dimen/size_10dp"
-        android:textColor="@color/green_1afa29"
+        android:textColor="@color/white"
         />
 
     <ImageView
