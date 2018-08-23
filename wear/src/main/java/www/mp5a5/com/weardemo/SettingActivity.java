@@ -33,13 +33,13 @@ public class SettingActivity extends WearableActivity {
     int locationTime = SpUtil.getInt(ConstantUtils.SETTING_TIME);
 
     if (contractNumber == -1) {
-      etInputPhone.setText(getString(R.string.setting_phone));
+      etInputPhone.setText("");
     } else {
       etInputPhone.setText(String.valueOf(contractNumber));
     }
 
     if (locationTime == -1) {
-      etInputTime.setText(getString(R.string.setting_location));
+      etInputTime.setText("");
     } else {
       etInputTime.setText(String.valueOf(locationTime));
     }
@@ -56,6 +56,7 @@ public class SettingActivity extends WearableActivity {
 
       if (isNum(UiUtils.getEditTextString(etInputTime))) {
         SpUtil.setInt(ConstantUtils.SETTING_TIME, Integer.parseInt(UiUtils.getEditTextString(etInputTime)));
+        this.finish();
       }
 
     });

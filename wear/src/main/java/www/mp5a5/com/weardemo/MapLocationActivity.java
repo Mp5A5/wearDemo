@@ -115,7 +115,7 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
         Log.e(TAG, amapLocation.getLocationType() + "," + amapLocation.getLatitude() + "," + amapLocation
             .getLongitude());
         tvLongitude.setText("经度：" + amapLocation.getLongitude());
-        tvLatitude.setText("经度：" + amapLocation.getLatitude());
+        tvLatitude.setText("纬度：" + amapLocation.getLatitude());
       } else {
         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
         Log.e("TAG", "location Error, ErrCode:"

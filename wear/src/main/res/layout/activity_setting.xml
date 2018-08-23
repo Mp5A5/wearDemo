@@ -31,6 +31,7 @@
             android:backgroundTint="@color/white"
             android:text="@string/setting_sure"
             android:textColor="#000000"
+            android:clickable="true"
             />
 
 

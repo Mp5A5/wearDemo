@@ -35,7 +35,7 @@ public class MainActivity extends WearableActivity {
 
     UiUtils.findViewById(this, R.id.rl_me_phone).setOnClickListener(v ->
 
-        new RxPermissions(this).requestEach(Manifest.permission.CALL_PHONE).subscribe(permission -> {
+        new RxPermissions(this).requestEachCombined(Manifest.permission.CALL_PHONE).subscribe(permission -> {
           if (permission.granted) {
             callPhone();
           } else if (permission.shouldShowRequestPermissionRationale) {
