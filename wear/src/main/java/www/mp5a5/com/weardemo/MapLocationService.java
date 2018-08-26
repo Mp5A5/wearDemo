@@ -1,58 +1,49 @@
 package www.mp5a5.com.weardemo;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.support.wearable.activity.WearableActivity;
+import android.app.Service;
+import android.content.Intent;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import www.mp5a5.com.weardemo.utils.UiUtils;
-
-public class MapLocationActivity extends WearableActivity implements AMapLocationListener {
-
+/**
+ * @author ：mp5a5 on 2018/8/26 19：12
+ * @describe
+ * @email：wwb199055@126.com
+ */
+public class MapLocationService extends Service {
 
   private AMapLocationClient mLocationClient;
   private AMapLocationClientOption mLocationOption = null;
   private final String TAG = this.getClass().getSimpleName();
-  private TextView tvLongitude;
-  private TextView tvLatitude;
+
+  @Nullable
+  @Override
+  public IBinder onBind(Intent intent) {
+    return null;
+  }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_map_location);
-    tvLongitude = UiUtils.findViewById(this, R.id.tv_longitude);
-    tvLatitude = UiUtils.findViewById(this, R.id.tv_latitude);
-    setAmbientEnabled();
-    initPermission();
+  public void onCreate() {
+    super.onCreate();
+    Log.e(TAG,"开启服务");
+    initMap();
   }
 
-  @SuppressLint("CheckResult")
-  private void initPermission() {
-    new RxPermissions(this).requestEachCombined(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission
-        .ACCESS_FINE_LOCATION).subscribe(permission -> {
-      if (permission.granted) {
-        initMap();
-      } else if (permission.shouldShowRequestPermissionRationale) {
-        Toast.makeText(this, "请开启定位权限！", Toast.LENGTH_SHORT).show();
-      } else {
-        Toast.makeText(this, "请到设置中开启定位权限！", Toast.LENGTH_SHORT).show();
-      }
-    });
 
+  @Override
+  public void onDestroy() {
+    super.onDestroy();
   }
+
 
   private void initMap() {
 
@@ -60,7 +51,7 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
     //初始化定位参数
     mLocationOption = new AMapLocationClientOption();
     //设置定位监听
-    mLocationClient.setLocationListener(this);
+    mLocationClient.setLocationListener(myLocationListener);
     //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
     mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
 
@@ -73,13 +64,6 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
     //设置是否允许模拟位置,默认为false，不允许模拟位置
     mLocationOption.setMockEnable(false);
     //设置定位间隔,单位毫秒,默认为2000ms
-
-  /*  if (SpUtil.getInt(ConstantUtils.SETTING_TIME) == -1) {
-      mLocationOption.setInterval(5000);
-    } else {
-      mLocationOption.setInterval(formatTime(SpUtil.getInt(ConstantUtils.SETTING_TIME)));
-    }*/
-
     mLocationOption.setInterval(5000);
 
     //设置定位参数
@@ -92,10 +76,7 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
     mLocationClient.startLocation();
   }
 
-
-  @SuppressLint("SetTextI18n")
-  @Override
-  public void onLocationChanged(AMapLocation amapLocation) {
+  private AMapLocationListener myLocationListener = amapLocation -> {
     if (amapLocation != null) {
       //定位成功回调信息，设置相关消息
       if (amapLocation.getErrorCode() == 0) {
@@ -113,8 +94,7 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
         df.format(date);
         Log.e(TAG, amapLocation.getLocationType() + "," + amapLocation.getLatitude() + "," + amapLocation
             .getLongitude());
-        tvLongitude.setText("经度：" + amapLocation.getLongitude());
-        tvLatitude.setText("纬度：" + amapLocation.getLatitude());
+
       } else {
         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
         Log.e("TAG", "location Error, ErrCode:"
@@ -122,9 +102,5 @@ public class MapLocationActivity extends WearableActivity implements AMapLocatio
             + amapLocation.getErrorInfo());
       }
     }
-  }
-
-  private long formatTime(int minute) {
-    return minute * 60 * 1000;
-  }
+  };
 }

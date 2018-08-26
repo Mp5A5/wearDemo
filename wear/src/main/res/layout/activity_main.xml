@@ -2,7 +2,7 @@
 <android.support.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/dark_grey"
+    android:background="@color/blue_E600AAFF"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
@@ -10,30 +10,78 @@
     android:padding="@dimen/box_inset_layout_padding"
     >
 
-    <LinearLayout
-        android:gravity="center_vertical"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/inner_frame_layout_padding"
-        app:boxedEdges="all"
-        android:orientation="vertical"
+
         >
 
-        <include layout="@layout/view_main_phone" />
-
-        <include layout="@layout/view_main_setting" />
-
-        <Button
-            android:layout_marginTop="@dimen/size_10dp"
-            android:id="@+id/btn_location"
+        <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_30dp"
-            android:background="@color/white"
-            android:text="位置"
-            android:textColor="@color/black"
-            android:layout_marginStart="@dimen/size_20dp"
-            android:layout_marginEnd="@dimen/size_20dp"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/inner_frame_layout_padding"
+            app:boxedEdges="all"
+            >
 
-    </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_marginTop="@dimen/size_20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_12dp"
+                android:drawableStart="@mipmap/icon_location"
+                android:layout_marginStart="@dimen/size_25dp"
+                android:layout_marginEnd="@dimen/size_25dp"
+                android:drawablePadding="@dimen/size_3dp"
+                android:gravity="center_vertical"
+                tools:text="北京市望京西"
+                />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:background="@drawable/shape_sos_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sos"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/blue_E600AAFF"
+                android:layout_marginTop="@dimen/size_7dp"
+                android:textSize="@dimen/size_23dp"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_setting"
+                android:layout_marginTop="@dimen/size_7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/me_setting"
+                android:textSize="@dimen/size_16dp"
+                android:drawableStart="@mipmap/icon_setting"
+                android:drawablePadding="@dimen/size_5dp"
+                android:gravity="center_vertical"
+                />
+
+            <!--<include layout="@layout/view_main_phone" />
+
+            <include layout="@layout/view_main_setting" />
+
+            <Button
+                android:layout_marginTop="@dimen/size_10dp"
+                android:id="@+id/btn_location"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_30dp"
+                android:background="@color/white"
+                android:text="位置"
+                android:textColor="@color/black"
+                android:layout_marginStart="@dimen/size_20dp"
+                android:layout_marginEnd="@dimen/size_20dp"
+                />-->
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </android.support.wear.widget.BoxInsetLayout>

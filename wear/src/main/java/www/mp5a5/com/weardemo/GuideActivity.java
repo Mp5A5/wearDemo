@@ -52,6 +52,7 @@ public class GuideActivity extends WearableActivity {
   }
 
   private void gotoWhere() {
+    startService(new Intent(this, MapLocationService.class));
     int time = SpUtil.getInt(ConstantUtils.SETTING_TIME);
     long contract = SpUtil.getLong(ConstantUtils.SETTING_CONTRACT);
     if (time == -1 && contract == -1) {

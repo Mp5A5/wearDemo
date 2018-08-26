@@ -27,38 +27,49 @@ public class SettingActivity extends WearableActivity {
   }
 
   private void initView() {
-    etInputPhone = UiUtils.findViewById(this, R.id.et_input_phone);
+    etInputPhone = UiUtils.findViewById(this, R.id.et_sos_num);
     etInputTime = UiUtils.findViewById(this, R.id.et_input_time);
     long contractNumber = SpUtil.getLong(ConstantUtils.SETTING_CONTRACT);
     int locationTime = SpUtil.getInt(ConstantUtils.SETTING_TIME);
-
+/*
     if (contractNumber == -1) {
-      etInputPhone.setText("");
+      etInputPhone.setHint("");
     } else {
-      etInputPhone.setText(String.valueOf(contractNumber));
+      etInputPhone.setHint(String.valueOf(contractNumber));
     }
 
     if (locationTime == -1) {
-      etInputTime.setText("");
+      etInputTime.setHint("");
     } else {
-      etInputTime.setText(String.valueOf(locationTime));
-    }
+      etInputTime.setHint(String.valueOf(locationTime));
+    }*/
   }
 
   private void initListener() {
-    UiUtils.findViewById(this, R.id.btn_sure).setOnClickListener(v -> {
+    UiUtils.findViewById(this, R.id.tv_sure).setOnClickListener(v -> {
 
-      if (isMobileNum(UiUtils.getEditTextString(etInputPhone))) {
-        SpUtil.setLong(ConstantUtils.SETTING_CONTRACT, Long.parseLong(UiUtils.getEditTextString(etInputPhone)));
+      if (UiUtils.getEditTextString(etInputPhone).trim().length() > 0) {
+        if (isMobileNum(UiUtils.getEditTextString(etInputPhone))) {
+          SpUtil.setLong(ConstantUtils.SETTING_CONTRACT, Long.parseLong(UiUtils.getEditTextString(etInputPhone)));
+        } else {
+          Toast.makeText(this, "请输入正确的电话号码！", Toast.LENGTH_SHORT).show();
+          return;
+        }
       } else {
-        Toast.makeText(this, "请输入正确的电话号码！", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "请输入电话号码！", Toast.LENGTH_SHORT).show();
+        return;
       }
 
-      if (isNum(UiUtils.getEditTextString(etInputTime))) {
-        SpUtil.setInt(ConstantUtils.SETTING_TIME, Integer.parseInt(UiUtils.getEditTextString(etInputTime)));
-        this.finish();
+      if (UiUtils.getEditTextString(etInputTime).trim().length() > 0) {
+        if (isNum(UiUtils.getEditTextString(etInputTime))) {
+          SpUtil.setInt(ConstantUtils.SETTING_TIME, Integer.parseInt(UiUtils.getEditTextString(etInputTime)));
+        }
+      } else {
+        Toast.makeText(this, "请输入发送时间！", Toast.LENGTH_SHORT).show();
+        return;
       }
 
+      this.finish();
     });
   }
 

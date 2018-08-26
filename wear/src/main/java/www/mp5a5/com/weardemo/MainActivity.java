@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -21,19 +20,17 @@ public class MainActivity extends WearableActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setAmbientEnabled();
-    TextView tvMePhone = UiUtils.findViewById(this, R.id.tv_me_phone);
-    tvMePhone.setText(String.valueOf(SpUtil.getLong(ConstantUtils.SETTING_CONTRACT)));
     initListener();
 
   }
 
   private void initListener() {
 
-    UiUtils.findViewById(this, R.id.rl_me_setting).setOnClickListener(v ->
+    UiUtils.findViewById(this, R.id.tv_setting).setOnClickListener(v ->
         startActivity(new Intent(this, SettingActivity.class))
     );
 
-    UiUtils.findViewById(this, R.id.rl_me_phone).setOnClickListener(v ->
+    UiUtils.findViewById(this, R.id.tv_phone).setOnClickListener(v ->
 
         new RxPermissions(this).requestEachCombined(Manifest.permission.CALL_PHONE).subscribe(permission -> {
           if (permission.granted) {
@@ -46,7 +43,7 @@ public class MainActivity extends WearableActivity {
         })
     );
 
-    UiUtils.findViewById(this, R.id.btn_location).setOnClickListener(v ->
+    UiUtils.findViewById(this, R.id.tv_location).setOnClickListener(v ->
         startActivity(new Intent(this, MapLocationActivity.class))
     );
   }
