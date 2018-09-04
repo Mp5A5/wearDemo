@@ -43,6 +43,7 @@
     <!-- 3.2.0版本增加 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".MyApplication"
@@ -82,7 +83,23 @@
             android:launchMode="singleTask" />
         <activity android:name=".MapLocationActivity" />
         <activity android:name=".SettingActivity" />
-        <service android:name=".MapLocationService"/>
+
+        <service
+            android:name=".MapLocationService"
+            android:process=":live" />
+        <service
+            android:name=".keeplive.KeepLiveManager$GrayInnerService"
+            android:process=":live" />
+
+        <activity
+            android:name=".keeplive.PixelActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:process=":live"
+            android:theme="@style/LiveActivityStyle" />
+
     </application>
 
 </manifest>

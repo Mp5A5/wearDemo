@@ -1,6 +1,5 @@
 package www.mp5a5.com.weardemo;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
@@ -10,16 +9,21 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 
+import org.simple.eventbus.EventBus;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import www.mp5a5.com.weardemo.keeplive.KeepLiveService;
+import www.mp5a5.com.weardemo.utils.ConstantUtils;
 
 /**
  * @author ：mp5a5 on 2018/8/26 19：12
  * @describe
  * @email：wwb199055@126.com
  */
-public class MapLocationService extends Service {
+public class MapLocationService extends KeepLiveService {
 
   private AMapLocationClient mLocationClient;
   private AMapLocationClientOption mLocationOption = null;
@@ -34,8 +38,16 @@ public class MapLocationService extends Service {
   @Override
   public void onCreate() {
     super.onCreate();
-    Log.e(TAG,"开启服务");
+    Log.e(TAG, "开启服务");
+  }
+
+  @Override
+  public int onStartCommand(Intent intent, int flags, int startId) {
+    Log.e(TAG, "开启地图");
     initMap();
+    int i = super.onStartCommand(intent, flags, startId);
+    Log.e("keeplive", "DemoService process = " + android.os.Process.myPid());
+    return i;
   }
 
 
@@ -76,30 +88,48 @@ public class MapLocationService extends Service {
     mLocationClient.startLocation();
   }
 
-  private AMapLocationListener myLocationListener = amapLocation -> {
-    if (amapLocation != null) {
+  private AMapLocationListener myLocationListener = aMapLocation -> {
+    if (aMapLocation != null) {
       //定位成功回调信息，设置相关消息
-      if (amapLocation.getErrorCode() == 0) {
+      if (aMapLocation.getErrorCode() == 0) {
         //获取当前定位结果来源，如网络定位结果，详见定位类型表
-        amapLocation.getLocationType();
+        aMapLocation.getLocationType();
         //获取纬度
-        amapLocation.getLatitude();
+        aMapLocation.getLatitude();
         //获取经度
-        amapLocation.getLongitude();
+        aMapLocation.getLongitude();
         //获取精度信息
-        amapLocation.getAccuracy();
+        aMapLocation.getAccuracy();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-        Date date = new Date(amapLocation.getTime());
+        Date date = new Date(aMapLocation.getTime());
         //定位时间
         df.format(date);
-        Log.e(TAG, amapLocation.getLocationType() + "," + amapLocation.getLatitude() + "," + amapLocation
+        Log.e(TAG, aMapLocation.getLocationType() + "," + aMapLocation.getLatitude() + "," + aMapLocation
             .getLongitude());
+        String location = /*aMapLocation.getAddress()+*/aMapLocation.getProvince() + aMapLocation.getCity() + aMapLocation.getDistrict() +
+            aMapLocation.getStreet()+aMapLocation.getStreetNum();
+        Log.e(TAG, aMapLocation.getCountry() + aMapLocation.getCity() + aMapLocation.getDistrict() + aMapLocation
+            .getStreet());
+        EventBus.getDefault().postSticky(location, ConstantUtils.MAP_LOCATION);
+
+        Intent intent = new Intent();
+        intent.setAction(ConstantUtils.MAP_RECEIVER_FILTER);
+        intent.putExtra(ConstantUtils.MAP_LOCATION, location);
+        sendBroadcast(intent);
 
       } else {
         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
         Log.e("TAG", "location Error, ErrCode:"
-            + amapLocation.getErrorCode() + ", errInfo:"
-            + amapLocation.getErrorInfo());
+            + aMapLocation.getErrorCode() + ", errInfo:"
+            + aMapLocation.getErrorInfo());
+        if (aMapLocation.getErrorCode() == 4) {
+          String msg = "请连接网络";
+          Intent intent = new Intent();
+          intent.setAction(ConstantUtils.MAP_RECEIVER_FILTER);
+          intent.putExtra(ConstantUtils.MAP_LOCATION, msg);
+          sendBroadcast(intent);
+        }
+
       }
     }
   };

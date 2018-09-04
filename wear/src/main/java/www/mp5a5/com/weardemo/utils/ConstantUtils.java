@@ -12,4 +12,9 @@ public class ConstantUtils {
 
   //时间
   public static final String SETTING_TIME = "setting_time";
+
+  //位置
+  public static final String MAP_LOCATION = "map_location";
+
+  public static final String MAP_RECEIVER_FILTER = "www.mp5a5.com.weardemo.MapLocationService";
 }

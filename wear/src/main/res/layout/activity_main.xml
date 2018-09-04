@@ -37,7 +37,7 @@
                 android:layout_marginEnd="@dimen/size_25dp"
                 android:drawablePadding="@dimen/size_3dp"
                 android:gravity="center_vertical"
-                tools:text="北京市望京西"
+                android:text="无定位地点"
                 />
 
             <TextView
